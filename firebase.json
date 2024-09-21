@@ -1,0 +1,46 @@
+{
+  "flutter": {
+    "platforms": {
+      "android": {
+        "default": {
+          "projectId": "joytop-1",
+          "appId": "1:452949743403:android:d72251b7c9fd4591bc576e",
+          "fileOutput": "android/app/google-services.json"
+        }
+      },
+      "dart": {
+        "lib/firebase_options.dart": {
+          "projectId": "joytop-1",
+          "configurations": {
+            "android": "1:452949743403:android:d72251b7c9fd4591bc576e",
+            "ios": "1:452949743403:ios:338c4a368d30dcdabc576e",
+            "macos": "1:452949743403:ios:338c4a368d30dcdabc576e",
+            "web": "1:452949743403:web:e955f597ace03821bc576e",
+            "windows": "1:452949743403:web:19a347bf377d723bbc576e"
+          }
+        }
+      }
+    }
+  },
+  "database": {
+    "rules": "database.rules.json"
+  },
+  "firestore": {
+    "rules": "firestore.rules",
+    "indexes": "firestore.indexes.json"
+  },
+  "hosting": {
+    "public": "build/web",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ],
+    "rewrites": [
+      {
+        "source": "**",
+        "destination": "/index.html"
+      }
+    ]
+  }
+}
