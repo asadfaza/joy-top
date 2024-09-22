@@ -198,3 +198,65 @@ List areaList = [
   '100-200 m^2',
   '200+ m^2'
 ];
+
+List<String> timeSlots = [
+  "09:00",
+  "10:00",
+  "11:00",
+  "12:00",
+  "13:00",
+  "14:00",
+  "15:00",
+  "16:00",
+  "17:00",
+  "18:00",
+  "19:00",
+  "20:00"
+];
+
+List<Map<String, dynamic>> paymentMethods = [
+    {'name': 'Uzum Bank', 'icon': Icons.account_balance_wallet_outlined},
+    {'name': 'Click', 'icon': Icons.touch_app},
+    {'name': 'Payme', 'icon': Icons.payment},
+    {'name': 'Other', 'icon': Icons.more_horiz},
+  ];
+
+List<Map<String, String>> recommendations = [
+  {
+    'title': 'Open the Olympic Games at Musée d\'Orsay',
+    'host': 'Hosted by Said Mukhtinov',
+    'price': '100,000 ₽/hour',
+    'image':
+        'https://admin.cspace.uz/uploads/03_2_d8c5812eb3.jpg', // Замените на URL изображения
+  },
+  {
+    'title': 'Open the Olympic Games at Musée d\'Orsay',
+    'host': 'Hosted by Said Mukhtinov',
+    'price': '100,000 ₽/hour',
+    'image': 'https://admin.cspace.uz/uploads/03_2_d8c5812eb3.jpg',
+  },
+  {
+    'title': 'Open the Olympic Games at Musée d\'Orsay',
+    'host': 'Hosted by Said Mukhtinov',
+    'price': '100,000 ₽/hour',
+    'image': 'https://admin.cspace.uz/uploads/03_2_d8c5812eb3.jpg',
+  },
+  {
+    'title': 'Open the Olympic Games at Musée d\'Orsay',
+    'host': 'Hosted by Said Mukhtinov',
+    'price': '100,000 ₽/hour',
+    'image': 'https://admin.cspace.uz/uploads/03_2_d8c5812eb3.jpg',
+  },
+  {
+    'title': 'Open the Olympic Games at Musée d\'Orsay',
+    'host': 'Hosted by Said Mukhtinov',
+    'price': '100,000 ₽/hour',
+    'image': 'https://admin.cspace.uz/uploads/03_2_d8c5812eb3.jpg',
+  },
+  {
+    'title': 'Open the Olympic Games at Musée d\'Orsay',
+    'host': 'Hosted by Said Mukhtinov',
+    'price': '100,000 ₽/hour',
+    'image': 'https://admin.cspace.uz/uploads/03_2_d8c5812eb3.jpg',
+  },
+];

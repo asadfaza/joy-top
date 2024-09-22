@@ -1,147 +1,238 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:joy_top/example.dart';
-import 'package:joy_top/registration/phone_number.dart';
+import 'package:joy_top/pages/favorite.dart';
 
-class Profile extends StatefulWidget {
-  const Profile({super.key});
-
-  @override
-  State<Profile> createState() => _ProfileState();
-}
-
-class _ProfileState extends State<Profile> {
-  String? name;
-  String? phoneNumber;
-  @override
-  void initState() {
-    super.initState();
-    getUserDataFromFirestore();
-  }
-
+class Profile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Size screenSize = MediaQuery.of(context).size;
-    return Scaffold(
-      backgroundColor: backColor,
-      appBar: AppBar(
+    return MaterialApp(
+      home: Scaffold(
         backgroundColor: backColor,
-        foregroundColor: Colors.black,
-        elevation: 0,
-        title: Center(
-            child: Text('joytop',
-                style: TextStyle(
-                    fontSize: 20,
-                    color: Colors.black,
-                    fontWeight: FontWeight.w900,
-                    fontFamily: 'DelaGothicOne'))),
-      ),
-      body: Center(
-        child: (name == 'no')
-            ? TextButton(
-                child: Text('Sign up'),
-                style: buttonStyle(screenSize.width, firstColor),
-                onPressed: () => Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => Number(),
-                    )),
-              )
-            : Column(
-                children: [
-                  Row(
-                    children: [
-                      SizedBox(width: 20),
-                      Text(
-                        name!,
-                        style: TextStyle(
-                            fontFamily: 'DelaGothicOne', fontSize: 30),
-                      ),
-                    ],
-                  ),
-                  Row(
-                    children: [
-                      SizedBox(width: 20),
-                      Text(
-                        phoneNumber!,
-                        style: TextStyle(
-                            fontFamily: 'DelaGothicOne', fontSize: 20),
-                      ),
-                    ],
-                  ),
-                  _profileOption(Icons.settings, 'Settings'),
-                  _profileOption(Icons.shopping_cart, 'Orders'),
-                  _profileOption(Icons.notifications, 'Notifications'),
-                  _profileOption(Icons.help, 'Help & Support'),
-                  _profileOption(Icons.info, 'About'),
-                  TextButton(
-                    style: buttonStyle(screenSize.width, firstColor),
-                    child: Text('Sign out'),
-                    onPressed: () => signOut(context),
-                  ),
-                ],
+        appBar: AppBar(
+          backgroundColor: backColor,
+          centerTitle: (screenSize.width <= 600),
+          foregroundColor: Colors.black,
+          elevation: 0,
+          title: Padding(
+            padding: EdgeInsets.only(left: screenSize.width * 0.03),
+            child: GestureDetector(
+              onTap: () =>
+                  (screenSize.width <= 600) ? null : Navigator.pop(context),
+              child: Text(
+                'joytop',
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25),
               ),
+            ),
+          ),
+          actions: (screenSize.width >= 600)
+              ? [
+                  TextButton.icon(
+                      onPressed: () => Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => FavoriteJoy(),
+                            ),
+                          ),
+                      icon: Icon(
+                        Icons.favorite_outline,
+                        color: Colors.black,
+                      ),
+                      label: Text(
+                        'whishlist',
+                        style: TextStyle(color: Colors.black),
+                      )),
+                  TextButton.icon(
+                      onPressed: () {},
+                      icon: Icon(
+                        Icons.person,
+                        color: Colors.black,
+                      ),
+                      label: Text(
+                        'profile',
+                        style: TextStyle(color: Colors.black),
+                      )),
+                  TextButton.icon(
+                      onPressed: () {},
+                      icon: Icon(
+                        Icons.help_outline,
+                        color: Colors.black,
+                      ),
+                      label: Text(
+                        'help',
+                        style: TextStyle(color: Colors.black),
+                      )),
+                  SizedBox(
+                    width: screenSize.width * 0.05,
+                  )
+                ]
+              : null,
+        ),
+        body: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              // Left Profile Section
+              Expanded(
+                flex: 1,
+                child: Column(
+                  children: [
+                    // Profile Image and Info
+                    Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        color: Colors.white,
+                      ),
+                      padding: EdgeInsets.all(16),
+                      child: Column(
+                        children: [
+                          // Profile Image
+                          ClipRRect(
+                            borderRadius: BorderRadius.circular(50),
+                            child: Image.network(
+                              'https://t3.ftcdn.net/jpg/02/43/12/34/360_F_243123463_zTooub557xEWABDLk0jJklDyLSGl2jrr.jpg', // Replace with actual URL or asset
+                              height: 100,
+                              width: 100,
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                          SizedBox(height: 10),
+                          Text(
+                            'Maggie',
+                            style: TextStyle(
+                              fontSize: 24,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          SizedBox(height: 5),
+                          Text(
+                            '24 y.o.',
+                            style: TextStyle(color: Colors.grey),
+                          ),
+                          SizedBox(height: 5),
+                          Text(
+                            '+998 90 999 99 99',
+                            style: TextStyle(color: Colors.grey),
+                          ),
+                          SizedBox(height: 5),
+                          Text(
+                            'Tashkent, Uzbekistan',
+                            style: TextStyle(color: Colors.grey),
+                          ),
+                          SizedBox(height: 20),
+                          // Events Card
+                          Card(
+                            color: Colors.grey[200],
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            child: Padding(
+                              padding: const EdgeInsets.all(16.0),
+                              child: Column(
+                                children: [
+                                  Text(
+                                    '100+',
+                                    style: TextStyle(
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                  Text(
+                                    'events',
+                                    style: TextStyle(color: Colors.grey, fontSize: 10),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+
+              SizedBox(width: 20),
+
+              // Right Content Section
+              Expanded(
+                flex: 2,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    // About Section
+                    Text(
+                      'About',
+                      style: TextStyle(
+                        fontSize: 24,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    SizedBox(height: 10),
+                    Text(
+                      'Description',
+                      style: TextStyle(color: Colors.grey),
+                    ),
+                    SizedBox(height: 10),
+                    Text(
+                      'Lorem ipsum dolor sit amet consectetur. '
+                      'Donec pharetra est quam cras facilisis. '
+                      'Magna purus ipsum eu odio nunc dignissim nibh condimentum. '
+                      'Id blandit facilisi diam consequat. Nibh in quisque orci fermentum amet.',
+                      style: TextStyle(fontSize: 16),
+                    ),
+                    SizedBox(height: 20),
+                    // Specialties Section
+                    Text(
+                      'Specialties',
+                      style: TextStyle(
+                        fontSize: 24,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    SizedBox(height: 10),
+                    Wrap(
+                      spacing: 5,
+                      runSpacing: 5,
+                      children: [
+                        SpecialtyChip('Conferences'),
+                        SpecialtyChip('Seminars'),
+                        SpecialtyChip('Workshops'),
+                        SpecialtyChip('Product launches'),
+                        SpecialtyChip('Team-building activities'),
+                        SpecialtyChip('Business meetings'),
+                        SpecialtyChip('Networking events'),
+                        SpecialtyChip('Trade shows and exhibitions'),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }
+}
 
-  Widget _profileOption(IconData icon, String title) {
-    return ListTile(
-      leading: Icon(icon),
-      title: Text(title),
-      onTap: () {
-        // You can add action for each ListTile here
-        print('$title clicked');
-      },
+class SpecialtyChip extends StatelessWidget {
+  final String label;
+
+  SpecialtyChip(this.label);
+
+  @override
+  Widget build(BuildContext context) {
+    return Chip(
+      label: Text(
+        label,
+        style: TextStyle(color: Colors.white),
+      ),
+      backgroundColor: Colors.black,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(10),
+      ),
     );
-  }
-
-  void signOut(BuildContext context) async {
-    await FirebaseAuth.instance.signOut();
-    Navigator.of(context).pushNamedAndRemoveUntil(
-        '/',
-        (route) =>
-            false); // Assuming you have a named route for your login screen
-  }
-
-  Future<void> getUserDataFromFirestore() async {
-    User? user = FirebaseAuth.instance.currentUser;
-
-    if (user != null) {
-      String userUID = user.phoneNumber!; // Using UID as the document ID
-      setState(() {
-        phoneNumber = userUID;
-      });
-      try {
-        CollectionReference collection =
-            FirebaseFirestore.instance.collection('users');
-        DocumentSnapshot documentSnapshot = await collection.doc(userUID).get();
-
-        // Check if the document exists
-        if (documentSnapshot.exists) {
-          // Get the data from the document
-          Map<String, dynamic> data =
-              documentSnapshot.data() as Map<String, dynamic>;
-          setState(() {
-            name = data['name'];
-          });
-          print(userUID);
-        } else {
-          print('Document does not exist');
-          print(userUID);
-        }
-      } catch (e) {
-        print("Error fetching user data: $e");
-        setState(() {
-          name = 'no';
-        });
-      }
-    } else {
-      print("No user is currently signed in.");
-      setState(() {
-        name = 'no';
-      });
-    }
   }
 }
